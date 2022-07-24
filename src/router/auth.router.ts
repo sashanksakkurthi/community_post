@@ -1,9 +1,14 @@
-import express, { IRouter, Request, Response } from "express";
-import { login, register,verify } from "../controllers/auth.controller";
+import express, { IRouter } from "express";
+import {
+  isAuthenticated,
+  login,
+  register,
+} from "../controllers/auth.controller";
+
 const router: IRouter = express.Router();
 
 router.post("/login/", login);
-router.post("/register/", register) ;
-router.post("/verify/",verify)
+router.post("/register/", register);
+router.post("/verify/", isAuthenticated);
 
 export default router;

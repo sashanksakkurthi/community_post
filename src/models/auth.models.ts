@@ -2,24 +2,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const VerifyData = async (email: string) => {
-  const data = await prisma.users.findUnique({
-    where: {
-      email: email,
-    },
-    select: {
-      first_name: true,
-      last_name: true,
-      email: true,
-    },
-  });
-  return {
-    firstName: data?.first_name,
-    lastName: data?.last_name,
-    email: data?.email,
-  };
-};
-
 const LoginData = async (email: string) => {
   const data = await prisma.users.findUnique({
     where: { email: email },
@@ -29,11 +11,7 @@ const LoginData = async (email: string) => {
       hash: true,
     },
   });
-  return {
-    email: data?.email,
-    password: data?.password,
-    hash: data?.hash,
-  };
+  return data;
 };
 
 const RegisterData = async (
@@ -49,12 +27,13 @@ const RegisterData = async (
       email: email,
       password: password,
     },
+    select: {
+      first_name: true,
+      last_name: true,
+      email: true,
+    },
   });
-  return {
-    email: data.email,
-    firstName: data.first_name,
-    lastName: data.last_name,
-  };
+  return data;
 };
 
-export { LoginData, RegisterData, VerifyData };
+export { LoginData, RegisterData};

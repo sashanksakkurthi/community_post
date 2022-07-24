@@ -17,6 +17,7 @@ model comments {
   user    users  @relation(fields: [userId], references: [hash])
   userId  String @db.VarChar(255)
   post    posts  @relation(fields: [postId], references: [hash])
+  createdAt  DateTime   @default(now())
   postId  String @db.VarChar(255)
 }
 
@@ -26,6 +27,7 @@ model like {
   user   users  @relation(fields: [userId], references: [hash])
   userId String @db.VarChar(255)
   post   posts  @relation(fields: [postId], references: [hash])
+  createdAt  DateTime   @default(now())
   postId String @db.VarChar(255)
 }
 
@@ -36,6 +38,7 @@ model posts {
   user     users      @relation(fields: [userId], references: [hash])
   userId   String     @db.VarChar(255)
   hash     String     @unique @default(uuid())
+  createdAt  DateTime   @default(now())
   like     like[]
   comments comments[]
 }
@@ -49,6 +52,7 @@ model users {
   password   String     @db.VarChar(255)
   active     Boolean    @default(true)
   verified   Boolean    @default(false)
+  createdAt  DateTime   @default(now())
   posts      posts[]
   like       like[]
   comments   comments[]

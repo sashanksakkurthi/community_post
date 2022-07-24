@@ -1,9 +1,14 @@
-import { Request, Response } from "express";
-import { LoginData, RegisterData, VerifyData } from "../models/auth.models";
+import { NextFunction, Request, Response } from "express";
+import { LoginData, RegisterData } from "../models/auth.models";
 import bcrypt from "bcryptjs";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
-const verify = async (req: Request, res: Response) => {
+// verify user
+const isAuthenticated = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const token = req.headers.authorization;
   if (!token) {
     res.status(401).json({ error: "unauthorized" });
@@ -12,15 +17,16 @@ const verify = async (req: Request, res: Response) => {
     const userToken = await jwt.verify(token!, process.env.JWT_SECRET!);
 
     if (userToken) {
-      const email: string = (userToken as JwtPayload).email;
-      const user = await VerifyData(email);
-      res.status(200).json({ user: user });
+      next();
+    } else {
+      res.sendStatus(401);
     }
   } catch (error) {
     res.status(401).json({ error: "unauthorized" });
   }
 };
 
+// login user
 const login = async (req: Request, res: Response) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -35,7 +41,7 @@ const login = async (req: Request, res: Response) => {
   try {
     const HashCompare = await bcrypt.compare(password, user?.password!);
     if (HashCompare) {
-      const payload = { hash: user.hash, email: user.email };
+      const payload = { hash: user?.hash, email: user?.email };
       const token = jwt.sign(payload, process.env.JWT_SECRET!, {
         algorithm: "HS256",
         expiresIn: "1hr",
@@ -47,9 +53,9 @@ const login = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(401).json({ error: "invalid username or password" });
   }
-  // request password not matched with user password send unauthorized as response
 };
 
+// register New User
 const register = async (req: Request, res: Response) => {
   const firstName: string = req.body.firstName;
   const lastName: string = req.body.lastName;
@@ -65,4 +71,4 @@ const register = async (req: Request, res: Response) => {
   }
 };
 
-export { login, register, verify };
+export { login, register, isAuthenticated };
