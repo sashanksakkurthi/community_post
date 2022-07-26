@@ -1,5 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { LoginData, RegisterData, VerifyData } from "../models/authentication";
+import {
+  DeleteUser,
+  LoginData,
+  RegisterData,
+  UpdateUser,
+  VerifyData,
+} from "../models/authentication";
 import bcrypt from "bcryptjs";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
@@ -67,9 +73,28 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const updateUser = async (req: Request, res: Response) => {};
+export const updateUser = async (req: Request, res: Response) => {
+  const hash = req.body.hash;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const password = await bcrypt.hash(req.body.password, 10);
+  try {
+    const user = UpdateUser(hash, firstName, lastName, password);
+    res.status(200).json({ user: user });
+  } catch (error) {
+    res.status(400).json({ error: "your account not updated" });
+  }
+};
 
-export const deleteUser = async (req: Request, res: Response) => {};
+export const deleteUser = async (req: Request, res: Response) => {
+  const hash = req.body.hash;
+  try {
+    const user = DeleteUser(hash);
+    res.status(200).json({ user: user });
+  } catch (error) {
+    res.status(400).json({ error: "your account not deleted" });
+  }
+};
 
 // register New User
 export const register = async (req: Request, res: Response) => {

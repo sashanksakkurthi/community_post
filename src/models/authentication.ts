@@ -50,3 +50,41 @@ export const RegisterData = async (
   });
   return data;
 };
+
+export const DeleteUser = async (hash: string) => {
+  const data = prisma.users.delete({
+    where: {
+      hash: hash,
+    },
+    select: {
+      email: true,
+      hash: true,
+    },
+  });
+  return data;
+};
+
+export const UpdateUser = async (
+  hash: string,
+  firstName: string,
+  lastName: string,
+  password: string
+) => {
+  const data = prisma.users.update({
+    where: {
+      hash: hash,
+    },
+    data: {
+      first_name: firstName,
+      last_name: lastName,
+      password: password,
+    },
+    select: {
+      first_name: true,
+      last_name: true,
+      password: true,
+      hash: true,
+    },
+  });
+  return data;
+};

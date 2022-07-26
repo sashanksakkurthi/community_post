@@ -1,9 +1,17 @@
 import express, { IRouter } from "express";
-import { isAuthenticated } from "src/controllers/authentication";
-import { createUserComment } from "src/controllers/comments";
+import { isAuthenticated } from "../controllers/authentication";
+import {
+  createUserComment,
+  deleteComment,
+  getComments,
+  updateComment,
+} from "../controllers/comments";
 
 const router: IRouter = express.Router();
 
-router.post("/comment/", isAuthenticated, createUserComment);
+router.post("/create-comment/", isAuthenticated, createUserComment);
+router.post("/delete-comment/", isAuthenticated, deleteComment);
+router.post("/update-comment/", isAuthenticated, updateComment);
+router.post("/get-comment/", isAuthenticated, getComments);
 
 export default router;
