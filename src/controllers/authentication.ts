@@ -1,10 +1,21 @@
 import { NextFunction, Request, Response } from "express";
-import { LoginData, RegisterData } from "../models/auth.models";
+import { LoginData, RegisterData, VerifyData } from "../models/authentication";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
+
+export const verifyUser = async (req: Request, res: Response) => {
+  const token = req.headers.authorization;
+
+  const userToken = await jwt.verify(token!, process.env.JWT_SECRET!);
+  const email: string = (userToken as JwtPayload).email;
+
+  const user = await VerifyData(email);
+
+  res.status(200).json({ user: user });
+};
 
 // verify user
-const isAuthenticated = async (
+export const isAuthenticated = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -12,22 +23,23 @@ const isAuthenticated = async (
   const token = req.headers.authorization;
   if (!token) {
     res.status(401).json({ error: "unauthorized" });
-  }
-  try {
-    const userToken = await jwt.verify(token!, process.env.JWT_SECRET!);
+  } else {
+    try {
+      const userToken = await jwt.verify(token!, process.env.JWT_SECRET!);
 
-    if (userToken) {
-      next();
-    } else {
-      res.sendStatus(401);
+      if (userToken) {
+        next();
+      } else {
+        res.sendStatus(401);
+      }
+    } catch (error) {
+      res.status(401).json({ error: "unauthorized" });
     }
-  } catch (error) {
-    res.status(401).json({ error: "unauthorized" });
   }
 };
 
 // login user
-const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response) => {
   const email = req.body.email;
   const password = req.body.password;
 
@@ -55,14 +67,17 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
+export const updateUser = async (req: Request, res: Response) => {};
+
+export const deleteUser = async (req: Request, res: Response) => {};
+
 // register New User
-const register = async (req: Request, res: Response) => {
+export const register = async (req: Request, res: Response) => {
   const firstName: string = req.body.firstName;
   const lastName: string = req.body.lastName;
   const email: string = req.body.email;
   const password: string = await bcrypt.hash(req.body.password, 10);
 
-  // send user data to create new user
   try {
     const user = await RegisterData(firstName, lastName, email, password);
     res.status(201).json({ user: user });
@@ -70,5 +85,3 @@ const register = async (req: Request, res: Response) => {
     res.status(400).json({ user: "user already exist" });
   }
 };
-
-export { login, register, isAuthenticated };
