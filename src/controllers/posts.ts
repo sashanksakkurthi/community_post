@@ -34,7 +34,7 @@ export const updatePost = async (req: Request, res: Response) => {
   const hash = req.body.hash;
   const content = req.body.content;
   try {
-    const post = UpdatePost(hash, content);
+    const post = await UpdatePost(hash, content);
     res.status(200).json({ post: post });
   } catch (error) {
     res.status(400).json({ error: "post not founded" });

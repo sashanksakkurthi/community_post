@@ -12,6 +12,6 @@ const router: IRouter = express.Router();
 router.post("/create-comment/", isAuthenticated, createUserComment);
 router.post("/delete-comment/", isAuthenticated, deleteComment);
 router.post("/update-comment/", isAuthenticated, updateComment);
-router.post("/get-comment/", isAuthenticated, getComments);
+router.get("/get-comment/", isAuthenticated, getComments);
 
 export default router;

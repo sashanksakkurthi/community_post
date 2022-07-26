@@ -49,7 +49,7 @@ export const DeleteComments = async (hash: string) => {
       hash: true,
     },
   });
-  return hash;
+  return data;
 };
 
 export const UpdateComment = async (hash: string, content: string) => {

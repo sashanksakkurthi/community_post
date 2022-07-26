@@ -82,7 +82,6 @@ export const UpdateUser = async (
     select: {
       first_name: true,
       last_name: true,
-      password: true,
       hash: true,
     },
   });

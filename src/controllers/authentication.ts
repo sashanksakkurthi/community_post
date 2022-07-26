@@ -14,9 +14,7 @@ export const verifyUser = async (req: Request, res: Response) => {
 
   const userToken = await jwt.verify(token!, process.env.JWT_SECRET!);
   const email: string = (userToken as JwtPayload).email;
-
   const user = await VerifyData(email);
-
   res.status(200).json({ user: user });
 };
 
@@ -49,24 +47,25 @@ export const login = async (req: Request, res: Response) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  // get user information form models
-  const user = await LoginData(email);
-
-  // user did not exist send unauthorized as response
-  if (!user) {
-    res.status(401).json({ error: "invalid username or password" });
-  }
   try {
-    const HashCompare = await bcrypt.compare(password, user?.password!);
-    if (HashCompare) {
-      const payload = { hash: user?.hash, email: user?.email };
-      const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-        algorithm: "HS256",
-        expiresIn: "1hr",
-      });
-      res.status(200).json({ token: token });
-    } else {
+    // get user information form models
+    const user = await LoginData(email);
+
+    // user did not exist send unauthorized as response
+    if (!user) {
       res.status(401).json({ error: "invalid username or password" });
+    } else {
+      const HashCompare = await bcrypt.compare(password, user?.password!);
+      if (HashCompare) {
+        const payload = { hash: user?.hash, email: user?.email };
+        const token = jwt.sign(payload, process.env.JWT_SECRET!, {
+          algorithm: "HS256",
+          expiresIn: "1hr",
+        });
+        res.status(200).json({ token: token });
+      } else {
+        res.status(401).json({ error: "invalid username or password" });
+      }
     }
   } catch (error) {
     res.status(401).json({ error: "invalid username or password" });
@@ -79,7 +78,7 @@ export const updateUser = async (req: Request, res: Response) => {
   const lastName = req.body.lastName;
   const password = await bcrypt.hash(req.body.password, 10);
   try {
-    const user = UpdateUser(hash, firstName, lastName, password);
+    const user = await UpdateUser(hash, firstName, lastName, password);
     res.status(200).json({ user: user });
   } catch (error) {
     res.status(400).json({ error: "your account not updated" });
@@ -89,7 +88,7 @@ export const updateUser = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
   const hash = req.body.hash;
   try {
-    const user = DeleteUser(hash);
+    const user = await DeleteUser(hash);
     res.status(200).json({ user: user });
   } catch (error) {
     res.status(400).json({ error: "your account not deleted" });
