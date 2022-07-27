@@ -1,13 +1,10 @@
 import express, { Application } from "express";
 import { Server } from "http";
-import dotenv from "dotenv";
 import auth from "./router/authentication";
 import posts from "./router/posts";
 import comment from "./router/comment";
 import like from "./router/likes";
 import cors from "cors";
-
-dotenv.config();
 
 const app: Application = express();
 
