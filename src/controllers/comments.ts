@@ -5,37 +5,36 @@ import {
   UpdateComment,
 } from "../models/comments";
 
-export const createUserComment = async (req: Request, res: Response) => {
-  const userId = req.body.userId;
-  const postId = req.body.postId;
-  const content = req.body.content;
-
+export const createComment = async (req: Request, res: Response) => {
+  const {
+    userId,
+    postId,
+    content,
+  }: { userId: string; postId: string; content: string } = req.body.userId;
   try {
     const comment = await CreateComment(postId, userId, content);
     res.status(201).json({ comment: comment });
   } catch (error) {
-    res.status(400).json({ error: "login again" });
-  }
-};
-
-export const deleteComment = async (req: Request, res: Response) => {
-  const hash = req.body.hash;
-  try {
-    const deleted = await DeleteComments(hash);
-    res.status(200).json({ deleted: deleted });
-  } catch (error) {
-    res.status(400).json({ error: "no comments founded" });
+    res.sendStatus(400);
   }
 };
 
 export const updateComment = async (req: Request, res: Response) => {
-  const hash = req.body.hash;
-  const content = req.body.content;
-
+  const { hash, content }: { hash: string; content: string } = req.body.hash;
   try {
     const comment = await UpdateComment(hash, content);
     res.status(201).json({ comment: comment });
   } catch (error) {
-    res.status(400).json({ error: "login again" });
+    res.sendStatus(400);
+  }
+};
+
+export const deleteComment = async (req: Request, res: Response) => {
+  const hash: string = req.body.hash;
+  try {
+    const deleted = await DeleteComments(hash);
+    res.status(200).json({ deleted: deleted });
+  } catch (error) {
+    res.sendStatus(400);
   }
 };

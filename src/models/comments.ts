@@ -16,21 +16,9 @@ export const CreateComment = async (
     select: {
       hash: true,
       comment: true,
-      createdAt: true,
       postId: true,
       userId: true,
-    },
-  });
-  return data;
-};
-
-export const DeleteComments = async (hash: string) => {
-  const data = prisma.comments.delete({
-    where: {
-      hash: hash,
-    },
-    select: {
-      hash: true,
+      createdAt: true,
     },
   });
   return data;
@@ -47,6 +35,18 @@ export const UpdateComment = async (hash: string, content: string) => {
       comment: true,
       postId: true,
       userId: true,
+    },
+  });
+  return data;
+};
+
+export const DeleteComments = async (hash: string) => {
+  const data = prisma.comments.delete({
+    where: {
+      hash: hash,
+    },
+    select: {
+      hash: true,
     },
   });
   return data;

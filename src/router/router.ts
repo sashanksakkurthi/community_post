@@ -9,7 +9,7 @@ import {
   updateUser,
 } from "../controllers/authentication";
 import {
-  createUserComment,
+  createComment,
   deleteComment,
   updateComment,
 } from "../controllers/comments";
@@ -42,7 +42,7 @@ router.post("/update-post/", isAuthenticated, updatePost);
 router.post("/delete-post/", isAuthenticated, deletePost);
 
 // user-comment post router
-router.post("/create-comment/", isAuthenticated, createUserComment);
+router.post("/create-comment/", isAuthenticated, createComment);
 router.post("/delete-comment/", isAuthenticated, deleteComment);
 router.post("/update-comment/", isAuthenticated, updateComment);
 

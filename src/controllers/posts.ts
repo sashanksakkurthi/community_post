@@ -9,35 +9,32 @@ import {
 import { Request, Response } from "express";
 
 export const createPost = async (req: Request, res: Response) => {
-  const userId = req.body.userId;
-  const content = req.body.content;
-
+  const { userId, content }: { userId: string; content: string } = req.body;
   try {
     const post = await CreatePost(userId, content);
     res.status(201).json({ post: post });
   } catch (error) {
-    res.status(400).json({ error: "login again" });
+    res.sendStatus(400);
   }
 };
 
 export const updatePost = async (req: Request, res: Response) => {
-  const hash = req.body.hash;
-  const content = req.body.content;
+  const { hash, content }: { hash: string; content: string } = req.body;
   try {
     const post = await UpdatePost(hash, content);
-    res.status(200).json({ post: post });
+    res.sendStatus(200);
   } catch (error) {
-    res.status(400).json({ error: "post not founded" });
+    res.sendStatus(400);
   }
 };
 
 export const deletePost = async (req: Request, res: Response) => {
-  const hash = req.body.hash;
+  const hash: string = req.body.hash;
   try {
     const post = DeletePost(hash);
     res.status(200).json({ post: post });
   } catch (error) {
-    res.status(400).json({ error: "post not founded" });
+    res.sendStatus(400);
   }
 };
 
