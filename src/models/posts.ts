@@ -2,11 +2,56 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const UserSpecificPosts = async (userId: string) => {
-  const data = await prisma.posts.findMany({
-    where: {
+export const CreatePost = async (userId: string, content: string) => {
+  const data = await prisma.posts.create({
+    data: {
       userId: userId,
+      content: content,
     },
+    select: {
+      hash: true,
+      content: true,
+      publish: true,
+      createdAt: true,
+    },
+  });
+  return data;
+};
+
+export const UpdatePost = async (hash: string, content: string) => {
+  const data = await prisma.posts.update({
+    where: {
+      hash: hash,
+    },
+    data: {
+      content: content,
+    },
+    select: {
+      hash: true,
+      content: true,
+    },
+  });
+  return data;
+};
+
+export const DeletePost = async (hash: string) => {
+  const data = await prisma.posts.delete({
+    where: {
+      hash: hash,
+    },
+    select: {
+      hash: true,
+    },
+  });
+  return data;
+};
+
+export const LatestPosts = async () => {
+  const data = await prisma.posts.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 20,
     select: {
       hash: true,
       publish: true,
@@ -25,12 +70,14 @@ export const UserSpecificPosts = async (userId: string) => {
           userId: true,
           postId: true,
           createdAt: true,
+          hash: true,
         },
       },
       comments: {
         select: {
           comment: true,
           createdAt: true,
+          hash: true,
           user: {
             select: {
               first_name: true,
@@ -69,12 +116,14 @@ export const PostByHash = async (hash: string) => {
           userId: true,
           postId: true,
           createdAt: true,
+          hash: true,
         },
       },
       comments: {
         select: {
           comment: true,
           createdAt: true,
+          hash: true,
           user: {
             select: {
               first_name: true,
@@ -90,29 +139,11 @@ export const PostByHash = async (hash: string) => {
   return data;
 };
 
-export const CreatePost = async (userId: string, content: string) => {
-  const data = await prisma.posts.create({
-    data: {
-      userId: userId,
-      content: content,
-    },
-    select: {
-      content: true,
-      hash: true,
-      publish: true,
-      userId: true,
-      createdAt: true,
-    },
-  });
-  return data;
-};
-
-export const LatestPosts = async () => {
+export const UserSpecificPosts = async (userId: string) => {
   const data = await prisma.posts.findMany({
-    orderBy: {
-      createdAt: "desc",
+    where: {
+      userId: userId,
     },
-    take: 20,
     select: {
       hash: true,
       publish: true,
@@ -131,12 +162,14 @@ export const LatestPosts = async () => {
           userId: true,
           postId: true,
           createdAt: true,
+          hash: true,
         },
       },
       comments: {
         select: {
           comment: true,
           createdAt: true,
+          hash: true,
           user: {
             select: {
               first_name: true,
@@ -147,34 +180,6 @@ export const LatestPosts = async () => {
           },
         },
       },
-    },
-  });
-  return data;
-};
-
-export const DeletePost = async (hash: string) => {
-  const data = prisma.posts.delete({
-    where: {
-      hash: hash,
-    },
-    select: {
-      hash: true,
-    },
-  });
-  return data;
-};
-
-export const UpdatePost = async (hash: string, content: string) => {
-  const data = await prisma.posts.update({
-    where: {
-      hash: hash,
-    },
-    data: {
-      content: content,
-    },
-    select: {
-      hash: true,
-      content: true,
     },
   });
   return data;

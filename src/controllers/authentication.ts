@@ -1,112 +1,116 @@
 import { NextFunction, Request, Response } from "express";
 import {
-  DeleteUser,
+  DeleteUserData,
   LoginData,
   RegisterData,
-  UpdateUser,
+  UpdateUserData,
   VerifyData,
 } from "../models/authentication";
 import bcrypt from "bcryptjs";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-// register New User
+// register new user
 export const register = async (req: Request, res: Response) => {
-  const firstName: string = req.body.firstName;
-  const lastName: string = req.body.lastName;
-  const email: string = req.body.email;
-  const password: string = await bcrypt.hash(req.body.password, 10);
-
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+  }: { firstName: string; lastName: string; email: string; password: string } =
+    req.body;
+  const hashPassword: string = await bcrypt.hash(password, 10);
   try {
-    const user = await RegisterData(firstName, lastName, email, password);
+    const user = await RegisterData(firstName, lastName, email, hashPassword);
     res.status(201).json({ user: user });
   } catch (error) {
-    res.status(400).json({ user: "user already exist" });
+    res.sendStatus(400);
   }
 };
 
+// login user
 export const login = async (req: Request, res: Response) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password }: { email: string; password: string } = req.body;
 
   try {
-    // get user information form models
     const user = await LoginData(email);
-
-    // user did not exist send unauthorized as response
     if (!user) {
-      res.status(401).json({ error: "invalid username or password" });
+      res.sendStatus(401);
     } else {
-      const HashCompare = await bcrypt.compare(password, user?.password!);
-      if (HashCompare) {
-        const payload = { hash: user?.hash, email: user?.email };
+      const compareHashPassword = await bcrypt.compare(
+        password,
+        user?.password!
+      );
+      if (compareHashPassword) {
+        const payload: { hash: string; email: string } = {
+          hash: user?.hash,
+          email: user?.email,
+        };
         const token = jwt.sign(payload, process.env.JWT_SECRET!, {
           algorithm: "HS256",
           expiresIn: "1hr",
         });
         res.status(200).json({ token: token });
       } else {
-        res.status(401).json({ error: "invalid username or password" });
+        res.sendStatus(401);
       }
     }
   } catch (error) {
-    res.status(401).json({ error: "invalid username or password" });
+    res.sendStatus(401);
   }
 };
 
+//verify user
 export const verifyUser = async (req: Request, res: Response) => {
-  const token = req.headers.authorization;
-
+  const token: string | undefined = req.headers.authorization;
   const userToken = await jwt.verify(token!, process.env.JWT_SECRET!);
   const email: string = (userToken as JwtPayload).email;
   const user = await VerifyData(email);
   res.status(200).json({ user: user });
 };
 
-// verify user
+// check user is authenticated
 export const isAuthenticated = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.headers.authorization;
+  const token: string | undefined = req.headers.authorization;
   if (!token) {
-    res.status(401).json({ error: "unauthorized" });
+    res.sendStatus(401);
   } else {
     try {
       const userToken = await jwt.verify(token!, process.env.JWT_SECRET!);
-
       if (userToken) {
         next();
       } else {
         res.sendStatus(401);
       }
     } catch (error) {
-      res.status(401).json({ error: "unauthorized" });
+      res.sendStatus(401);
     }
   }
 };
 
-// login user
-
+// update user data
 export const updateUser = async (req: Request, res: Response) => {
   const hash = req.body.hash;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
-  const password = await bcrypt.hash(req.body.password, 10);
   try {
-    const user = await UpdateUser(hash, firstName, lastName, password);
+    const user = await UpdateUserData(hash, firstName, lastName);
     res.status(200).json({ user: user });
   } catch (error) {
-    res.status(400).json({ error: "your account not updated" });
+    res.status(400);
   }
 };
 
+// delete user data
 export const deleteUser = async (req: Request, res: Response) => {
   const hash = req.body.hash;
   try {
-    const user = await DeleteUser(hash);
-    res.status(200).json({ user: user });
+    await DeleteUserData(hash);
+    res.status(200);
   } catch (error) {
-    res.status(400).json({ error: "your account not deleted" });
+    res.status(400);
   }
 };
