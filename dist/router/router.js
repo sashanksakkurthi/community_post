@@ -1,0 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const likes_1 = require("../controllers/likes");
+const authentication_1 = require("../controllers/authentication");
+const comments_1 = require("../controllers/comments");
+const posts_1 = require("../controllers/posts");
+const router = express_1.default.Router();
+router.get("/get-posts/", authentication_1.isAuthenticated, posts_1.getLatestPosts);
+router.get("/get-posts/:hashId/", authentication_1.isAuthenticated, posts_1.getHashSpecificPosts);
+router.get("/get-user-posts/:userId/", authentication_1.isAuthenticated, posts_1.getUserSpecificPosts);
+router.post("/login-user/", authentication_1.login);
+router.post("/register-user/", authentication_1.register);
+router.post("/verify-user/", authentication_1.isAuthenticated, authentication_1.verifyUser);
+router.post("/delete-user/", authentication_1.isAuthenticated, authentication_1.deleteUser);
+router.post("/update-user/", authentication_1.isAuthenticated, authentication_1.updateUser);
+router.post("/create-post/", authentication_1.isAuthenticated, posts_1.createPost);
+router.post("/update-post/", authentication_1.isAuthenticated, posts_1.updatePost);
+router.post("/delete-post/", authentication_1.isAuthenticated, posts_1.deletePost);
+router.post("/create-comment/", authentication_1.isAuthenticated, comments_1.createComment);
+router.post("/delete-comment/", authentication_1.isAuthenticated, comments_1.deleteComment);
+router.post("/update-comment/", authentication_1.isAuthenticated, comments_1.updateComment);
+router.post("/create-like/", authentication_1.isAuthenticated, likes_1.createLike);
+router.post("/delete-like/", authentication_1.isAuthenticated, likes_1.deleteLike);
+exports.default = router;

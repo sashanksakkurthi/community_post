@@ -1,31 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateComment = exports.deleteComment = exports.getComments = exports.createUserComment = void 0;
+exports.deleteComment = exports.updateComment = exports.createComment = void 0;
 const comments_1 = require("../models/comments");
-const createUserComment = async (req, res) => {
-    const userId = req.body.userId;
-    const postId = req.body.postId;
-    const content = req.body.content;
+const createComment = async (req, res) => {
+    const { userId, postId, content, } = req.body.userId;
     try {
         const comment = await (0, comments_1.CreateComment)(postId, userId, content);
         res.status(201).json({ comment: comment });
     }
     catch (error) {
-        res.status(400).json({ error: "login again" });
+        res.sendStatus(400);
     }
 };
-exports.createUserComment = createUserComment;
-const getComments = async (req, res) => {
-    const postId = req.body.postId;
+exports.createComment = createComment;
+const updateComment = async (req, res) => {
+    const { hash, content } = req.body.hash;
     try {
-        const comment = await (0, comments_1.GetComments)(postId);
-        res.status(200).json({ comment: comment });
+        const comment = await (0, comments_1.UpdateComment)(hash, content);
+        res.status(201).json({ comment: comment });
     }
     catch (error) {
-        res.status(400).json({ error: "no comments founded" });
+        res.sendStatus(400);
     }
 };
-exports.getComments = getComments;
+exports.updateComment = updateComment;
 const deleteComment = async (req, res) => {
     const hash = req.body.hash;
     try {
@@ -33,19 +31,7 @@ const deleteComment = async (req, res) => {
         res.status(200).json({ deleted: deleted });
     }
     catch (error) {
-        res.status(400).json({ error: "no comments founded" });
+        res.sendStatus(400);
     }
 };
 exports.deleteComment = deleteComment;
-const updateComment = async (req, res) => {
-    const hash = req.body.hash;
-    const content = req.body.content;
-    try {
-        const comment = await (0, comments_1.UpdateComment)(hash, content);
-        res.status(201).json({ comment: comment });
-    }
-    catch (error) {
-        res.status(400).json({ error: "login again" });
-    }
-};
-exports.updateComment = updateComment;
