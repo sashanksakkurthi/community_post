@@ -24,22 +24,6 @@ export const CreateComment = async (
   return data;
 };
 
-export const GetComments = async (postId: string) => {
-  const data = prisma.comments.findMany({
-    where: {
-      postId: postId,
-    },
-    select: {
-      postId: true,
-      comment: true,
-      hash: true,
-      userId: true,
-      createdAt: true,
-    },
-  });
-  return data;
-};
-
 export const DeleteComments = async (hash: string) => {
   const data = prisma.comments.delete({
     where: {

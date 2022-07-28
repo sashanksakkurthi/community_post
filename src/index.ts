@@ -1,10 +1,10 @@
 import express, { Application } from "express";
 import { Server } from "http";
-import auth from "./router/authentication";
-import posts from "./router/posts";
-import comment from "./router/comment";
-import like from "./router/likes";
+import router from "./router/router";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app: Application = express();
 
@@ -12,12 +12,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/v1", auth);
-app.use("/api/v1", posts);
-app.use("/api/v1", comment);
-app.use("/api/v1", like);
- 
-const PORT = process.env.PORT;
+app.use("/api/v1", router);
+
+const PORT = process.env.PORT || 8080;
 const server: Server = app.listen(PORT, () => {
   console.log(`listening at port ${PORT}`);
 });

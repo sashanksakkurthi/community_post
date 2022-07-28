@@ -8,10 +8,17 @@ export const UserSpecificPosts = async (userId: string) => {
       userId: userId,
     },
     select: {
+      hash: true,
       publish: true,
       content: true,
-      userId: true,
-      hash: true,
+      user: {
+        select: {
+          first_name: true,
+          last_name: true,
+          email: true,
+          hash: true,
+        },
+      },
       createdAt: true,
       like: {
         select: {
@@ -22,10 +29,16 @@ export const UserSpecificPosts = async (userId: string) => {
       },
       comments: {
         select: {
-          userId: true,
-          postId: true,
           comment: true,
           createdAt: true,
+          user: {
+            select: {
+              first_name: true,
+              last_name: true,
+              hash: true,
+              email: true,
+            },
+          },
         },
       },
     },
@@ -39,10 +52,17 @@ export const PostByHash = async (hash: string) => {
       hash: hash,
     },
     select: {
+      hash: true,
       publish: true,
       content: true,
-      userId: true,
-      hash: true,
+      user: {
+        select: {
+          first_name: true,
+          last_name: true,
+          email: true,
+          hash: true,
+        },
+      },
       createdAt: true,
       like: {
         select: {
@@ -53,10 +73,16 @@ export const PostByHash = async (hash: string) => {
       },
       comments: {
         select: {
-          userId: true,
-          postId: true,
           comment: true,
           createdAt: true,
+          user: {
+            select: {
+              first_name: true,
+              last_name: true,
+              hash: true,
+              email: true,
+            },
+          },
         },
       },
     },
@@ -88,10 +114,17 @@ export const LatestPosts = async () => {
     },
     take: 20,
     select: {
+      hash: true,
       publish: true,
       content: true,
-      userId: true,
-      hash: true,
+      user: {
+        select: {
+          first_name: true,
+          last_name: true,
+          email: true,
+          hash: true,
+        },
+      },
       createdAt: true,
       like: {
         select: {
@@ -102,10 +135,16 @@ export const LatestPosts = async () => {
       },
       comments: {
         select: {
-          userId: true,
-          postId: true,
           comment: true,
           createdAt: true,
+          user: {
+            select: {
+              first_name: true,
+              last_name: true,
+              hash: true,
+              email: true,
+            },
+          },
         },
       },
     },

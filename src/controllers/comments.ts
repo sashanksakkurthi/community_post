@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import {
   CreateComment,
   DeleteComments,
-  GetComments,
   UpdateComment,
 } from "../models/comments";
 
@@ -16,16 +15,6 @@ export const createUserComment = async (req: Request, res: Response) => {
     res.status(201).json({ comment: comment });
   } catch (error) {
     res.status(400).json({ error: "login again" });
-  }
-};
-
-export const getComments = async (req: Request, res: Response) => {
-  const postId = req.body.postId;
-  try {
-    const comment = await GetComments(postId);
-    res.status(200).json({ comment: comment });
-  } catch (error) {
-    res.status(400).json({ error: "no comments founded" });
   }
 };
 
