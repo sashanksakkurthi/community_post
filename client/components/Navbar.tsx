@@ -11,6 +11,7 @@ import {
   useColorModeValue,
   useColorMode,
   Text,
+  Link,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
@@ -43,7 +44,12 @@ const Navbar = () => {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>My Posts</MenuItem>
+                <MenuItem>
+                  <Link href="/" >Home</Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link href="/myposts" >My Posts</Link>
+                </MenuItem>
                 <MenuItem>Activity&#39;s</MenuItem>
                 <MenuDivider />
                 <MenuItem>settings</MenuItem>

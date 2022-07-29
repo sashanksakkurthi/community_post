@@ -1,9 +1,11 @@
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
   Divider,
   Flex,
   HStack,
+  IconButton,
   Text,
 } from "@chakra-ui/react";
 import React from "react";
@@ -19,7 +21,7 @@ const PostCard = () => {
         borderRadius="lg"
         overflow="hidden"
       >
-        <Flex h={"14"} align={"center"} p={2}>
+        <Flex h={"14"} align={"center"} p={2} justify={"space-between"}>
           <HStack>
             <Avatar size={"sm"} />
             <Box>
@@ -29,6 +31,10 @@ const PostCard = () => {
               </Text>
             </Box>
           </HStack>
+          <Flex gap={2}>
+            <IconButton size={"xs"} aria-label={""} icon={<EditIcon />} />
+            <IconButton size={"xs"} aria-label={""} icon={<DeleteIcon />} />
+          </Flex>
         </Flex>
         <Divider />
         <Box p="6">
