@@ -7,20 +7,42 @@ import {
   Stack,
   Button,
   Heading,
+  useColorModeValue,
+  useColorMode,
   Text,
   Link,
 } from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { NextPage } from "next";
 
 const Login: NextPage = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"gray.800"}>
+      <Button
+        position={"absolute"}
+        top={"5"}
+        size={"sm"}
+        right={"5"}
+        onClick={toggleColorMode}
+      >
+        {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+      </Button>
+      <Flex
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      >
         <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
           <Stack align={"center"}>
             <Heading fontSize={"4xl"}>Sign in to your account</Heading>
           </Stack>
-          <Box rounded={"lg"} bg={"gray.700"} boxShadow={"lg"}>
+          <Box
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+          >
             <Stack spacing={4}>
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>

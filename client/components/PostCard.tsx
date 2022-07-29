@@ -1,23 +1,26 @@
 import {
   Avatar,
+  useColorModeValue,
   Box,
   Divider,
   Flex,
+  IconButton,
   HStack,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import { AiFillHeart, AiOutlineComment } from "react-icons/ai";
 import PostActions from "./PostActions";
 
 const PostCard = () => {
   return (
     <Flex justify={"center"} bg={"gray.800"}>
       <Box
-        w={{ base: "96", sm: "xl", lg: "2xl" }}
+        w={{ base: "80", sm: "md", lg: "xl" }}
         borderWidth="1px"
         borderRadius="lg"
         overflow="hidden"
-        mx={2}
       >
         <Flex h={"14"} align={"center"} p={2}>
           <HStack>

@@ -11,24 +11,47 @@ import {
   Button,
   Heading,
   Text,
+  useColorModeValue,
+  useColorMode,
   Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { NextPage } from "next";
 
 const Register: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"gray.800"}>
+      <Button
+        position={"absolute"}
+        top={"5"}
+        right={"5"}
+        size={"sm"}
+        onClick={toggleColorMode}
+      >
+        {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+      </Button>
+      <Flex
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      >
         <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
           <Stack align={"center"}>
             <Heading fontSize={"4xl"} textAlign={"center"}>
               Sign up
             </Heading>
           </Stack>
-          <Box rounded={"lg"} bg={"gray.700"} boxShadow={"lg"} p={8}>
+          <Box
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+            p={8}
+          >
             <Stack spacing={4}>
               <HStack>
                 <Box>
