@@ -11,7 +11,6 @@ const PostInput = () => {
             placeholder="Create New Post"
             size="md"
             variant={"filled"}
-            bg={"gray.700"}
           />
           <IconButton aria-label={""} size={"sm"} icon={<ArrowUpIcon />} />
         </HStack>
