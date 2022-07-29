@@ -1,5 +1,5 @@
 import express, { IRouter } from "express";
-import { createLike, deleteLike } from "../controllers/likes";
+import { createLike, deleteLike } from "./controllers/likes";
 import {
   isAuthenticated,
   login,
@@ -7,12 +7,12 @@ import {
   verifyUser,
   deleteUser,
   updateUser,
-} from "../controllers/authentication";
+} from "./controllers/authentication";
 import {
   createComment,
   deleteComment,
   updateComment,
-} from "../controllers/comments";
+} from "./controllers/comments";
 import {
   createPost,
   getLatestPosts,
@@ -20,7 +20,7 @@ import {
   getUserSpecificPosts,
   updatePost,
   deletePost,
-} from "../controllers/posts";
+} from "./controllers/posts";
 
 const router: IRouter = express.Router();
 
