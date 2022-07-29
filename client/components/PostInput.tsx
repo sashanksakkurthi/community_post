@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Flex, HStack, IconButton, Input } from "@chakra-ui/react";
+import { Flex, HStack, IconButton, Input } from "@chakra-ui/react";
 import { ArrowUpIcon } from "@chakra-ui/icons";
 const PostInput = () => {
   return (

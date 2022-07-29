@@ -8,25 +8,18 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  useColorModeValue,
-  useColorMode,
   Text,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const Navbar = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg={"gray.900"} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Text fontWeight={"bold"} fontSize={"2xl"}>
             Community Post
           </Text>
           <Flex alignItems={"center"} gap={4}>
-            <Button onClick={toggleColorMode} size={"sm"}>
-              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-            </Button>
             <Menu>
               <MenuButton
                 as={Button}
