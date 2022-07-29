@@ -11,7 +11,7 @@ import PostActions from "./PostActions";
 
 const PostCard = () => {
   return (
-    <Flex justify={"center"}>
+    <Flex justify={"center"} bg={"gray.800"}>
       <Box
         w={{ base: "96", sm: "xl", lg: "2xl" }}
         borderWidth="1px"

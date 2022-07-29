@@ -16,7 +16,7 @@ const Navbar = () => {
     <>
       <Box bg={"gray.900"} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Text fontWeight={"bold"} fontSize={"2xl"}>
+          <Text fontWeight={"bold"} textColor={"gray.100"} fontSize={"2xl"}>
             Community Post
           </Text>
           <Flex alignItems={"center"} gap={4}>
