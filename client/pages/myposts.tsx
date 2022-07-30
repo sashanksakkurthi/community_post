@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
+import { Stack, Progress } from "@chakra-ui/react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { Progress, Stack } from "@chakra-ui/react";
-import PostInput from "../components/PostInput";
 import PostCard from "../components/PostCard";
-import { useState } from "react";
-const Home: NextPage = () => {
+import PostInput from "../components/PostInput";
+
+const MyPosts = () => {
   const [logging, setLogging] = useState(false);
   setTimeout(() => {
     setLogging(true);
@@ -26,4 +26,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default MyPosts;
