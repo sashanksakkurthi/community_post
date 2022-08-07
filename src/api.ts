@@ -1,52 +1,52 @@
-import express, { IRouter } from "express";
-import { createLike, deleteLike } from "./controllers/likes";
+import express, {IRouter} from "express";
+import {createLike, deleteLike} from "./service/likesService";
 import {
-  isAuthenticated,
-  login,
-  register,
-  verifyUser,
-  deleteUser,
-  updateUser,
-} from "./controllers/authentication";
+    isAuthenticated,
+    login,
+    register,
+    verifyUser,
+    deleteUser,
+    updateUser,
+} from "./service/authService";
 import {
-  createComment,
-  deleteComment,
-  updateComment,
-} from "./controllers/comments";
+    createComment,
+    deleteComment,
+    updateComment,
+} from "./service/commentService";
 import {
-  createPost,
-  getLatestPosts,
-  getHashSpecificPosts,
-  getUserSpecificPosts,
-  updatePost,
-  deletePost,
-} from "./controllers/posts";
+    createPost,
+    getLatestPosts,
+    getHashSpecificPosts,
+    getUserSpecificPosts,
+    updatePost,
+    deletePost,
+} from "./service/postService";
 
 const router: IRouter = express.Router();
 
-// user-posts get routers
+// posts get routers
 router.get("/get-posts/", isAuthenticated, getLatestPosts);
 router.get("/get-posts/:hashId/", isAuthenticated, getHashSpecificPosts);
 router.get("/get-user-posts/:userId/", isAuthenticated, getUserSpecificPosts);
 
-// user-authentication post router
+// authentication post router
 router.post("/login-user/", login);
 router.post("/register-user/", register);
 router.post("/verify-user/", isAuthenticated, verifyUser);
 router.post("/delete-user/", isAuthenticated, deleteUser);
 router.post("/update-user/", isAuthenticated, updateUser);
 
-// user-posts post router
+// posts post router
 router.post("/create-post/", isAuthenticated, createPost);
 router.post("/update-post/", isAuthenticated, updatePost);
 router.post("/delete-post/", isAuthenticated, deletePost);
 
-// user-comment post router
+// comment post router
 router.post("/create-comment/", isAuthenticated, createComment);
 router.post("/delete-comment/", isAuthenticated, deleteComment);
 router.post("/update-comment/", isAuthenticated, updateComment);
 
-// user-like post router
+// like post router
 router.post("/create-like/", isAuthenticated, createLike);
 router.post("/delete-like/", isAuthenticated, deleteLike);
 
