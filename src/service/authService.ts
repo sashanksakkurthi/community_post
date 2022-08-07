@@ -3,7 +3,6 @@ import {
     DeleteUserData,
     LoginData,
     RegisterData,
-    UpdateUserData,
     VerifyData,
 } from "../repository/authRepository";
 import bcrypt from "bcryptjs";
@@ -92,19 +91,6 @@ export const isAuthenticated = async (
         } catch (error) {
             res.sendStatus(401);
         }
-    }
-};
-
-// update user data
-export const updateUser = async (req: Request, res: Response) => {
-    const hash = req.body.hash;
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    try {
-        const user = await UpdateUserData(hash, firstName, lastName);
-        res.status(200).json({user: user});
-    } catch (error) {
-        res.status(400);
     }
 };
 

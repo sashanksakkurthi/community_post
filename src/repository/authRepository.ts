@@ -48,27 +48,6 @@ export const VerifyData = async (email: string) => {
         });
 };
 
-export const UpdateUserData = async (
-    hash: string,
-    firstName: string,
-    lastName: string
-) => {
-    return prisma.users.update({
-            where: {
-                hash: hash,
-            },
-            data: {
-                first_name: firstName,
-                last_name: lastName,
-            },
-            select: {
-                first_name: true,
-                last_name: true,
-                hash: true,
-            },
-        });
-};
-
 export const DeleteUserData = async (hash: string) => {
     prisma.users.delete({
             where: {

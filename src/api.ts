@@ -6,7 +6,6 @@ import {
     register,
     verifyUser,
     deleteUser,
-    updateUser,
 } from "./service/authService";
 import {
     createComment,
@@ -34,7 +33,6 @@ router.post("/login-user/", login);
 router.post("/register-user/", register);
 router.post("/verify-user/", isAuthenticated, verifyUser);
 router.post("/delete-user/", isAuthenticated, deleteUser);
-router.post("/update-user/", isAuthenticated, updateUser);
 
 // posts post router
 router.post("/create-post/", isAuthenticated, createPost);

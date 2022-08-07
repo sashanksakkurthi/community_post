@@ -1,0 +1,505 @@
+{
+	"info": {
+		"_postman_id": "5bb24ca4-3367-4538-af8e-8f07c7410069",
+		"name": "community_post",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19045142"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"sakkurthisashank@gmail.com\",\n    \"password\":\"sashank9490\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/login-user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"login-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"sashank\",\n    \"lastName\":\"sakkurthi\",\n    \"email\": \"sakkurthisashank@gmail.com\",\n    \"password\": \"sashank9490\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/register-user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"register-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMjcyYWJiNmEtZmNiNC00ZTE4LWI1ZTEtNDU0ODhmNTA4MzJjIiwiZW1haWwiOiJzYWtrdXJ0aGlzYXNoYW5rQGdtYWlsLmNvbSIsImlhdCI6MTY1OTg4MzcwMSwiZXhwIjoxNjU5ODg3MzAxfQ.WxPXNDPaAgkVgqNRYGtXAzideTefD2l5VfFEHaAlfE4"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/verify-user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"verify-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMjcyYWJiNmEtZmNiNC00ZTE4LWI1ZTEtNDU0ODhmNTA4MzJjIiwiZW1haWwiOiJzYWtrdXJ0aGlzYXNoYW5rQGdtYWlsLmNvbSIsImlhdCI6MTY1OTg4MzcwMSwiZXhwIjoxNjU5ODg3MzAxfQ.WxPXNDPaAgkVgqNRYGtXAzideTefD2l5VfFEHaAlfE4"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\":\"272abb6a-fcb4-4e18-b5e1-45488f50832c\",\n    \"content\":\"😊 Hello from amaravathi\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/create-post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"create-post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get posts by hash",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMjcyYWJiNmEtZmNiNC00ZTE4LWI1ZTEtNDU0ODhmNTA4MzJjIiwiZW1haWwiOiJzYWtrdXJ0aGlzYXNoYW5rQGdtYWlsLmNvbSIsImlhdCI6MTY1OTg4MzcwMSwiZXhwIjoxNjU5ODg3MzAxfQ.WxPXNDPaAgkVgqNRYGtXAzideTefD2l5VfFEHaAlfE4"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/get-posts/e1b06463-8df1-477e-a5ba-e07af91212a0/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"get-posts",
+						"e1b06463-8df1-477e-a5ba-e07af91212a0",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get All Posts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMjcyYWJiNmEtZmNiNC00ZTE4LWI1ZTEtNDU0ODhmNTA4MzJjIiwiZW1haWwiOiJzYWtrdXJ0aGlzYXNoYW5rQGdtYWlsLmNvbSIsImlhdCI6MTY1OTg4MzcwMSwiZXhwIjoxNjU5ODg3MzAxfQ.WxPXNDPaAgkVgqNRYGtXAzideTefD2l5VfFEHaAlfE4"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/get-posts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"get-posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get post by user specific",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMjcyYWJiNmEtZmNiNC00ZTE4LWI1ZTEtNDU0ODhmNTA4MzJjIiwiZW1haWwiOiJzYWtrdXJ0aGlzYXNoYW5rQGdtYWlsLmNvbSIsImlhdCI6MTY1OTg4MzcwMSwiZXhwIjoxNjU5ODg3MzAxfQ.WxPXNDPaAgkVgqNRYGtXAzideTefD2l5VfFEHaAlfE4"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/get-user-posts/272abb6a-fcb4-4e18-b5e1-45488f50832c/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"get-user-posts",
+						"272abb6a-fcb4-4e18-b5e1-45488f50832c",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiYzA1M2M0NjYtNzgyNy00N2YxLTk4ZmMtYjk0Y2RmZWRmY2RiIiwiZW1haWwiOiJzYWtrdXJ0aGlzYXJpdGhhQGdtYWlsLmNvbSIsImlhdCI6MTY1ODg1MzE2NSwiZXhwIjoxNjU4ODU2NzY1fQ.W0h47UmCttgddmnmxFzHaHOvwWZPegZ5Bd91VF0DxjE"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"hash\": \"c053c466-7827-47f1-98fc-b94cdfedfcdb\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/delete-user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"delete-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMmU0YmMwMzktYzgzMS00MzkwLWIxN2YtOGM0OTE1N2FlZmI5IiwiZW1haWwiOiJzYWtrdXJ0aGlzYXJpdGhhQGdtYWlsLmNvbSIsImlhdCI6MTY1ODg1NTU5MywiZXhwIjoxNjU4ODU5MTkzfQ.A08O0eaupaeYgo_XtUgUaWs_xY3AnFjGbz-YBgiUIM8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"hash\": \"9c3ebd6e-a0f0-4715-ab4d-0f424b58766c\",\n    \"content\": \"Hello from amaravathi\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/update-post/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"update-post",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMmU0YmMwMzktYzgzMS00MzkwLWIxN2YtOGM0OTE1N2FlZmI5IiwiZW1haWwiOiJzYWtrdXJ0aGlzYXJpdGhhQGdtYWlsLmNvbSIsImlhdCI6MTY1ODg1NTU5MywiZXhwIjoxNjU4ODU5MTkzfQ.A08O0eaupaeYgo_XtUgUaWs_xY3AnFjGbz-YBgiUIM8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"hash\": \"9c3ebd6e-a0f0-4715-ab4d-0f424b58766c\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/delete-post/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"delete-post",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMmU0YmMwMzktYzgzMS00MzkwLWIxN2YtOGM0OTE1N2FlZmI5IiwiZW1haWwiOiJzYWtrdXJ0aGlzYXJpdGhhQGdtYWlsLmNvbSIsImlhdCI6MTY1ODg1NjI1NSwiZXhwIjoxNjU4ODU5ODU1fQ.asdXDHW2drTw-zYbX7ATasxgxra4YJyVFeEM_0mgQLA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"postId\": \"67a426c2-65c7-4b78-b31c-bd0da5374e7f\",\n    \"content\":\"good to see you\",\n    \"userId\": \"33c7dd29-a7c8-4c08-9fd5-464bbb914fbb\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/create-comment/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"create-comment",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMmU0YmMwMzktYzgzMS00MzkwLWIxN2YtOGM0OTE1N2FlZmI5IiwiZW1haWwiOiJzYWtrdXJ0aGlzYXJpdGhhQGdtYWlsLmNvbSIsImlhdCI6MTY1ODg1NjI1NSwiZXhwIjoxNjU4ODU5ODU1fQ.asdXDHW2drTw-zYbX7ATasxgxra4YJyVFeEM_0mgQLA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\":\"good to see you sashank\",\n    \"hash\": \"a7b98bce-d764-4b6c-8d6b-cfc0b83afe8c\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/update-comment/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"update-comment",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMmU0YmMwMzktYzgzMS00MzkwLWIxN2YtOGM0OTE1N2FlZmI5IiwiZW1haWwiOiJzYWtrdXJ0aGlzYXJpdGhhQGdtYWlsLmNvbSIsImlhdCI6MTY1ODg1NTU5MywiZXhwIjoxNjU4ODU5MTkzfQ.A08O0eaupaeYgo_XtUgUaWs_xY3AnFjGbz-YBgiUIM8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"hash\": \"a7b98bce-d764-4b6c-8d6b-cfc0b83afe8c\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/delete-comment/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"delete-comment",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create like",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMmU0YmMwMzktYzgzMS00MzkwLWIxN2YtOGM0OTE1N2FlZmI5IiwiZW1haWwiOiJzYWtrdXJ0aGlzYXJpdGhhQGdtYWlsLmNvbSIsImlhdCI6MTY1ODg1NTU5MywiZXhwIjoxNjU4ODU5MTkzfQ.A08O0eaupaeYgo_XtUgUaWs_xY3AnFjGbz-YBgiUIM8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"userId\": \"33c7dd29-a7c8-4c08-9fd5-464bbb914fbb\",\n      \"postId\": \"67a426c2-65c7-4b78-b31c-bd0da5374e7f\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/create-like/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"create-like",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete like",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoYXNoIjoiMmU0YmMwMzktYzgzMS00MzkwLWIxN2YtOGM0OTE1N2FlZmI5IiwiZW1haWwiOiJzYWtrdXJ0aGlzYXJpdGhhQGdtYWlsLmNvbSIsImlhdCI6MTY1ODg1NTU5MywiZXhwIjoxNjU4ODU5MTkzfQ.A08O0eaupaeYgo_XtUgUaWs_xY3AnFjGbz-YBgiUIM8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"hash\":\"e101a81b-4205-4451-bbc5-f7bbe408a1de\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/delete-like/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"delete-like",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
